@@ -24,6 +24,12 @@ async def create_pool(loop, **kw):
         loop=loop
     )
 
+async def destory_pool():
+    global __pool
+    if __pool is not None :
+        __pool.close()
+        await __pool.wait_closed()
+
 async def select(sql, args, size=None):
     log(sql, args)
     global __pool
